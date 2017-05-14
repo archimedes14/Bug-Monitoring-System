@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Feature Page</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
@@ -14,7 +14,7 @@
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Feature's Page</h1>
-        <p> To be Added </p>
+        <p> Click on the link provided under the Bugs column to view the list of bugs </p>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
@@ -26,16 +26,53 @@
                 <h3><span class="fa fa-user"></span> Local</h3>
 
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
                     </p>
-
+            </div>
+            </div>
+          <!-- Add a new feature option -->  
+        <div class = "col-sm-6">
+            <div class = "well">
+                <h3><span class="fa fa-plus-square" aria-hidden="true"></span> Add a new feature</h3>
+                <a href="" class="btn btn-default btn-sm">Add</a>
             </div>
         </div>
-
     </div>
-
+</div>
+<!-- Table starts here -->
+<div class="container">
+<table st-safe-src="rowCollection" st-table="displayCollection" class="table table-striped">
+    <thead>
+        <tr>
+            <th st-sort="featureName">Feature</th>
+            <th>Description</th>
+            <th>Bugs</th>
+            <th st-sort="stackHolders">StackHolders</th>
+            <th st-sort="assignee">Assignee</th>
+        </tr>
+        <tr>
+            <th colspan="1">
+                <input st-search="featureName" placeholder="search for feature" class="input-sm form-control" type="search"/>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in displayCollection">
+            <td>{{row.featureName | uppercase}}</td>
+            <td>{{row.description}}</td>
+            <td><a ng-href="{{row.bugsList}}">BugsList</a></td>
+            <td>{{row.stackHolders}}</td>
+            <td>{{row.assignee}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                </td>
+            </tr>
+        </tfoot>
+</table>
 </div>
 </body>
 </html>
