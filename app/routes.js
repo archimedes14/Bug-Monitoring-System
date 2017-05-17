@@ -50,7 +50,7 @@ module.exports = function(app, passport) {
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
-        });
+         });
     });
 
     // =====================================
@@ -60,7 +60,36 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    //======================================
+    // ADD FEATURE =========================
+    //======================================
+    var Feature = require('./models/feature');
+        
+    app.post('/feature', function(req, res){
+        var feature = req.body.featureName;
+        var featureDescription = req.body.featureDescription;
+        var featureAssignee = req.body.featureAssignee;
+        var featureStackHolders = req.body.myInputs;
+
+       var newFeature = new Feature({
+            feature: feature,
+            featureDescription: featureDescription,
+            featureAssignee: featureAssignee,
+            featureStackHolders: featureStackHolders
+        });
+
+        Feature.createFeature(newFeature, function(err, feature){
+            if(err)
+                throw err;
+             console.log(feature);
+        });
+
+        res.redirect('/profile');
+    });
 };
+    
+
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
