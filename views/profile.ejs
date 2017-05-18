@@ -163,7 +163,7 @@
     </div>
   </form>
 
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped table-condensed">
 
     <thead>
       <tr>
@@ -189,10 +189,9 @@
         </td>
       </tr>
     </thead>
-
     <tbody>
-      <tr ng-repeat="x in features | filter:searchFeature">
-        <td><a ng-href="{{x.feature}}" target="_blank">{{ x.feature }}</td>
+      <tr ng-repeat="x in features | filter:searchFeature" ng-click="showFeature(feature)">
+        <td><a ng-href="#/profile/{{x.feature}}" target="_blank">{{ x.feature }}</td>
         <td>{{ x.featureDescription }}</td>
         <td>{{ x.featureAssignee}}</td>
         <td>{{ x.featureStackHolders[0]}}</td>
