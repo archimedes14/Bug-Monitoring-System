@@ -63,7 +63,7 @@
     </div>
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" style="float: right;">
           <li><a href="#">Back To Top</a></li>
           <li><a href="/logout">Logout</a></li>
             </ul>
@@ -167,6 +167,10 @@
 
     <thead>
       <tr>
+      <td>
+        <b>
+          Serial No.
+        </td>
         <td>
         <b>
           Feature Name 
@@ -191,12 +195,9 @@
     </thead>
     <tbody>
       <tr ng-repeat="x in features | filter:searchFeature" ng-click="showFeature(feature)">
+        <td>{{$index+1}}</td>
         <td><a ng-href="profile/{{x._id}}/bugs" target="_blank">{{ 
         x.feature }}</td>
-        <!--
-        <td><a ng-href="/bugs" target="_blank">{{ 
-        x.feature }}</td>
-        -->
         <td>{{ x.featureDescription }}</td>
         <td>{{ x.featureAssignee}}</td>
         <td>{{ x.featureStackHolders[0]}}</td>

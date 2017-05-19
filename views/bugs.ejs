@@ -62,7 +62,7 @@
     </div>
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" style="float: right;">
           <li><a href="#">Back To Top</a></li>
           <li><a href="/logout">Logout</a></li>
             </ul>
@@ -121,5 +121,51 @@
 
     </div>
   </div>
+
+   <!-- Table starts here -->
+  <div class="container" ng-app="sortApp" ng-controller="mainController">
+  <!-- Search Box -->
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search for Feature" ng-model="searchFeature">
+      </div>      
+    </div>
+  </form>
+
+  <table class="table table-bordered table-striped table-condensed">
+
+    <thead>
+      <tr>
+        <td>
+        <b>
+          Serial no. 
+        </td>
+        <td>
+        <b>
+          Bug Name
+        </td>
+        <td>
+        <b>
+          Bug Description
+        </td>
+        <td>
+        <b>
+          Bug Status        
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in features | filter:searchFeature" ng-click="showFeature(feature)">
+        <td>{{$index+1}}</td>
+        <td>{{ x.bugName }}</td>
+        <td>{{ x.bugDescription}}</td>
+        <td>{{ x.bugStatus}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
   </body>
   </html>
