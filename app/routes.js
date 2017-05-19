@@ -84,11 +84,16 @@ module.exports = function(app, passport) {
 
   app.post('/feature', function(req, res) {
     var feature = req.body.featureName;
+    var featureCreatedBy = req.user.local.email;
     var featureDescription = req.body.featureDescription;
     var featureAssignee = req.body.featureAssignee;
     var featureStackHolders = req.body.myInputs;
+
+    console.log(featureCreatedBy);
+
     var newFeature = new Feature({
       feature: feature,
+      featureCreatedBy: featureCreatedBy,
       featureDescription: featureDescription,
       featureAssignee: featureAssignee,
       featureStackHolders: featureStackHolders

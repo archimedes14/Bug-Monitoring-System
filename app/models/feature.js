@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var FeatureSchema = mongoose.Schema({
 
   feature: String,
-  // featureCreatedBy      : String,
+  featureCreatedBy: String,
   featureDescription: String,
   featureAssignee: String,
   featureStackHolders: [String]
