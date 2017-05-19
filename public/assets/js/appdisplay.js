@@ -7,7 +7,7 @@ app.controller('mainController', function($scope,$http) {
       $scope.features =data;
       $scope.searchFeature = '';
       $scope.showFeature = function(feature) {
-  		$location.path('#/user/' + features.feature);
+  	  $location.path('profile/'+features._id+'bugs'); 
 	}; 
     });    
   });

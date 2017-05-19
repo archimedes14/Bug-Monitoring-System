@@ -78,7 +78,7 @@
 
     <div class="page-header text-center">
       <h1><span class="fa fa-anchor"></span> Feature Page</h1>
-      <p> Click on the link provided under the Bugs column to view the list of bugs </p>
+      <p> Click on the feature name to view the list of bugs </p>
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
@@ -191,7 +191,12 @@
     </thead>
     <tbody>
       <tr ng-repeat="x in features | filter:searchFeature" ng-click="showFeature(feature)">
-        <td><a ng-href="#/profile/{{x.feature}}" target="_blank">{{ x.feature }}</td>
+        <td><a ng-href="profile/{{x._id}}/bugs" target="_blank">{{ 
+        x.feature }}</td>
+        <!--
+        <td><a ng-href="/bugs" target="_blank">{{ 
+        x.feature }}</td>
+        -->
         <td>{{ x.featureDescription }}</td>
         <td>{{ x.featureAssignee}}</td>
         <td>{{ x.featureStackHolders[0]}}</td>

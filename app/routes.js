@@ -77,7 +77,6 @@ module.exports = function(app, passport) {
   })
 
 
-
   //======================================
   // ADD FEATURE =========================
   //======================================
@@ -100,6 +99,18 @@ module.exports = function(app, passport) {
       console.log(feature);
     });
     res.redirect('/profile');
+  });
+  
+  //=====================================
+  // BUGS LIST ==========================
+  //=====================================
+
+  app.get('/profile/:id/bugs',isLoggedIn, function(req, res) {
+    //res.send('user '+req.params.id+' bugs');
+    console.log('user '+req.params.id+' bugs');
+    res.render('bugs.ejs', {
+      user: req.user // get the user out of session and pass to template
+    });
   });
 
   // =====================================
