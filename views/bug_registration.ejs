@@ -1,0 +1,248 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+
+<head>
+  <title>Bug Monitoring System</title>  
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+  <!-- Navigation Bar -->
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+
+  <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->  
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+  <style>
+    body {
+      padding-top:80px; 
+      word-wrap: break-word;
+      position: relative; 
+    }
+  </style>
+  
+  <!-- Favicon and touch icons -->
+  <link rel="shortcut icon" href="assets/ico/favicon.png">
+  <link rel="/public/apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="/public/apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="/public/apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="/public/apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body>
+<!--Navigation Bar-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile">Bug Monitoring System</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="javascript:history.back()">Back</a></li>
+      <li><a href="/"><i class="glyphicon glyphicon-log-out"></i>  Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!--Bug Registration Form -->
+<div class="container">
+
+    <form class="well form-horizontal" action=" " method="post"  id="bug_form">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Report Bug!</legend>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Bug Title</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+  <input  name="bug_title" placeholder="Bug Title" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+<!-- Text area -->
+  
+<div class="form-group">
+  <label class="col-md-4 control-label">Bug Description</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+          <textarea class="form-control" name="bug_description" placeholder="Bug Description"></textarea>
+  </div>
+  </div>
+</div>
+
+<!-- Image input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Bug Screenshot</label>  
+  <div class="col-md-4 inputGroupContainer">
+    <label class="control-label">Select File</label>
+    <input id="input-6" name="input6[]" type="file" multiple class="file-loading">
+  </div>
+</div>
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Bug-Creation Date</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      <div class="bootstrap-iso">
+      <input class="form-control" id="date" name="bug_creationDate" placeholder="MM/DD/YYYY" type="text"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Bug-Last Updated Date</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      <div class="bootstrap-iso">
+      <input class="form-control" id="date" name="bug_lastUpdated" placeholder="MM/DD/YYYY" type="text"/>
+      </div>
+    </div>
+  </div>
+</div> 
+       
+<!-- radio checks  -->
+ <div class="form-group">
+                        <label class="col-md-4 control-label">Bug Location</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="STAGING" /> Staging
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="PRODUCTION" /> Production
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- radio checks -->
+<div class="form-group">
+                        <label class="col-md-4 control-label">Bug Status</label>
+                        <div class="col-md-4">                           
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="PROGRESS" /> Progress
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="FIXED" /> Fixed
+                                </label>
+                            </div>                            
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="CLOSED" /> Closed
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- radio checks  IGNORABLE/MINOR/MAJOR/CRITICAL/BLOCKER-->
+<div class="form-group">
+                        <label class="col-md-4 control-label">Bug Priority</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="IGNORABLE" /> Ignorable
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="MINOR" /> Minor
+                                </label>
+                            </div>                            
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="MAJOR" /> Major
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="CRITICAL" /> Critical
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="bug_location" value="BLOCKER" /> Blocker
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-warning" >Submit<span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+</div>
+<!-- /.container -->
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+  $(document).ready(function(){
+    var date_input=$('input[name="bug_creationDate"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_input.datepicker({
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+  $(document).ready(function(){
+    var date_mod_input=$('input[name="bug_lastUpdated"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_mod_input.datepicker({
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+</script>
+
+
+
+</body>
+
+</html>

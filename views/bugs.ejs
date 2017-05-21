@@ -1,84 +1,37 @@
+<!-- views/bugs.ejs -->
 <!doctype html>
 <html>
 
 <head>
-  <title>Bugs Page</title>
+  <title>Bugs Monitoring System</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
   <style>
     body {
       word-wrap: break-word;
       position: relative; 
     }
-  .affix {
-      top:0;
-      width: 100%;
-      z-index: 9999 !important;
-    }
-  .navbar {
-      margin-bottom: 0px;
-    }
-
-  .affix ~ .container-fluid {
-     position: relative;
-     top: 2px;
-    }
-
   </style>
-  <!-- CSS -->
- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-   
-  <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/form-elements.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-  <link rel="stylesheet" ; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
+  <!-- CSS   -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">     
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+
+ 
   <!-- Favicon and touch icons -->
   <link rel="shortcut icon" href="assets/ico/favicon.png">
-  <link rel="/public/apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-  <link rel="/public/apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-  <link rel="/public/apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-  <link rel="/public/apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+</head>
 </head>
 <body>
-<!-- navigation bar -->
-<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
-  <div class="container-fluid">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="/profile">Bug Monitoring System</a>
-    </div>
-    <div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav" style="float: right;">
-          <li><a href="#">Back To Top</a></li>
-          <li><a href="/logout">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>    
 
   <div class="container">
-
     <div class="page-header text-center">
-      <h1><span class="fa fa-anchor"></span> Bugs Page</h1>
+      <h1><span class="fa fa-anchor"></span>Feature Details</h1>
       <p> Click on the bug name to view its properties </p>
-      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>      
+    </div>
     </div>
 
     <div class="row">
@@ -92,22 +45,27 @@
             <strong>email</strong>:
             <%= user.local.email %><br>
           </p>
+          <p>
+            <strong>Feature ID</strong>:
+            <%= feature %><br>
+          </p>
         </div>
       </div>
 
       <!-- Add a new feature option -->
       <div class="col-sm-3">
         <div class="well">
-          <h3><span class="fa fa-plus-square" aria-hidden="true"></span> Add a new bug </h3>
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-register">ADD</button>
+          <h3><span class="fa fa-plus-square" aria-hidden="true"></span> Report Bug </h3>
+          <a href="/bug_registration" class="btn btn-default btn-sm" role="button">ADD</a>
+
         </div>
       </div>
-
+      
       <!--- Modify feature -->
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-pencil-square-o" aria-hidden="true"></span> Update feature </h3>
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-register">UPDATE</button>
+          <button type="button1" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-register">UPDATE</button>
         </div>
       </div>
       <!-- Delete feature -->
@@ -115,7 +73,7 @@
         <div class="well">
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-register">DELETE</button>
+          <button type="button1" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-register">DELETE</button>
         </div>
       </div>
 
@@ -129,7 +87,7 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input type="text" class="form-control" placeholder="Search for Feature" ng-model="searchFeature">
+        <input type="text" class="form-control" placeholder="Search for Bugs" ng-model="searchFeature">
       </div>      
     </div>
   </form>
@@ -166,6 +124,28 @@
     </tbody>
   </table>
 </div>
+
+
+
+
+
+  <!-- ANGULAR SCRIPTS 
+
+
+  -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+  <script src="assets/js/appdisplay.js"></script>
+
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery.backstretch.min.js"></script>
+  <script src="assets/js/scripts.js"></script>
+
+
+
+  <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
 
   </body>
   </html>

@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>Feature Page</title>
+  <title>Bug Monitoring System</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <style>
@@ -51,7 +51,7 @@
 </head>
 <body>
 <!-- navigation bar -->
-<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" color="black">
   <div class="container-fluid">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -81,6 +81,7 @@
       <p> Click on the feature name to view the list of bugs </p>
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
+    </div>
 
     <div class="row">
 
@@ -95,6 +96,7 @@
           </p>
         </div>
       </div>
+      
       <!-- Add a new feature option -->
       <div class="col-sm-6">
         <div class="well">
@@ -104,6 +106,9 @@
       </div>
     </div>
   </div>
+
+
+  
 
 
   <!-- MODAL -->
@@ -196,7 +201,7 @@
     <tbody>
       <tr ng-repeat="x in features | filter:searchFeature" ng-click="showFeature(feature)">
         <td>{{$index+1}}</td>
-        <td><a ng-href="profile/{{x._id}}/bugs" target="_blank">{{ 
+        <td><a ng-href="profile/{{x._id}}/bugs">{{ 
         x.feature }}</td>
         <td>{{ x.featureDescription }}</td>
         <td>{{ x.featureAssignee}}</td>
