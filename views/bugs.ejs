@@ -46,21 +46,16 @@
             <%= user.local.email %><br>
           </p>
           <p>
-            <strong>Feature ID</strong>:
-            <%= feature %><br>
-          </p>
-          <p>
-            <strong>Feature Name</strong>:
-            <%=feature_name%><br>
+            <strong>Feature</strong>:
+            <%= feature.feature %><br>
           </p>
         </div>
       </div>
-
       <!-- Add a new feature option -->
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-plus-square" aria-hidden="true"></span> Report Bug </h3>
-          <a href="/profile/<%=feature%>/<%= feature_name %>/bug_registration/" class="btn btn-default btn-sm" role="button">ADD</a>
+          <a href = "/profile/<%=feature._id%>/bug_registration" class="btn btn-default btn-sm" role="button">ADD</a>
 
         </div>
       </div>

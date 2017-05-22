@@ -6,10 +6,10 @@ var BugSchema = mongoose.Schema({
   			bug_description: String,
   			bug_screenshot: [String],
   			bug_creationDate: Date,
-  			bug_lastUpdatedDate: Date ,
-  			bug_assignee: [String],
+  			bug_lastUpdatedDate: Date,
+  			bug_assignee: String,
   			bug_loggedBy: String,
-  			bug_location: Date,
+  			bug_location: String,
   			bug_status:String,
   			bug_priority:String
 });

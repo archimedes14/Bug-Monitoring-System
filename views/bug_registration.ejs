@@ -70,11 +70,11 @@
           </p>
           <p>
             <strong>Feature ID</strong>:
-            <%= feature %><br>
+            <%= feature._id %><br>
           </p>
           <p>
             <strong>Feature Name</strong>:
-            <%= feature_name %><br>
+            <%= feature.feature %><br>
           </p>
         </div>
       </div>
@@ -84,11 +84,33 @@
 <!--Bug Registration Form -->
 <div class="container">
 
-<form class="well form-horizontal" action="/profile/<%= feature %>/bug_registration" method="post"  id="bug_form">
+<form class="well form-horizontal" action="/profile/{{feature._id}}/bug_registration" method="post"  id="bug_form">
 <fieldset>
 
 <!-- Form Name -->
 <legend>Report Bug!</legend>
+
+<!--Feature ID -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Feature ID</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+  <input  name="feature_id" value="<%= feature._id %>" class="form-control"  type="text" readonly>
+    </div>
+  </div>
+</div>
+
+<!-- Feature Assignee -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Feature Assignee</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+  <input  name="feature_assignee" value="<%= feature.featureAssignee %>" class="form-control"  type="text" readonly>
+    </div>
+  </div>
+</div>
 
 <!-- Text input-->
 

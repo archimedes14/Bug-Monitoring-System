@@ -119,63 +119,72 @@ module.exports = function(app, passport) {
     //=====================================
     // BUGS LIST ==========================
     //=====================================
-    app.get('/profile/:id/:name/bugs', isLoggedIn, function(req, res) {
-        //res.send('user '+req.params.id+' bugs');
+    app.get('/profile/:id/bugs', isLoggedIn, function(req, res) {
         //console.log('user '+req.feature.feature+' bugs');
-        res.render('bugs.ejs', {
-            user: req.user, // get the user out of session and pass to template
-            feature: req.params.id,
-            feature_name:req.params.name
+        Feature.find({"_id":req.params.id},
+        function(err, feature){
+            res.render('bugs.ejs',{
+                user: req.user, // get the user out of session and pass to template
+                feature: feature[0]
+            });
         });
     });
 
     //=====================================
-    // BUGS REGISTRATION PAGE==============
+    // BUGS REGISTRATION PAGE =============
     //=====================================
 
-    app.get('/profile/:id/:name/bug_registration', isLoggedIn, function(req, res) {
-        res.render('bug_registration.ejs', {
-            user: req.user, // get the user out of session and pass to template
-            feature: req.params.id,
-            feature_name:req.params.name
+    app.get('/profile/:id/bug_registration', isLoggedIn, function(req, res) {
+        Feature.find({"_id":req.params.id},
+        function(err, feature){
+            console.log(feature);
+            res.render('bug_registration.ejs', {
+                user: req.user, // get the user out of session and pass to template
+                feature: feature[0]
+            });
         });
     });
-  
 
-
-   /* //======================================
+    //========================================
     // ADD BUG ===============================
     //========================================
     
-
     app.post('/profile/:id/bug_registration', function(req, res) {
-        var feature_id: req.params.id,
-        var bug_title: req.body.bug_title,
-        var bug_description: req.body.bug_description,
-        var bug_screenshot: [String],    /// keep it blank, will integrate cloudinary into it
-        var bug_creationDate: req.body.bug_creationDate,
-        //var bug_lastUpdatedDate: req.body.bug_creationDate,   //need not to be given for new bugs
-        var bug_assignee: [String],                //needs to populated from Feature StackHolder
-        var bug_loggedBy: req.user.local.email,
-        var bug_location: req.body.bug_location,
-        var bug_status:   req.body.bug_status,
-        var bug_priority: req.body.bug_creationDate
+        
+        var feature_id = req.body.feature_id;
+        var bug_title = req.body.bug_title;
+        var bug_description = req.body.bug_description;
+        var bug_screenshot = [String];    /// keep it blank, will integrate cloudinary into it
+        var bug_creationDate = req.body.bug_creationDate;
+        var bug_lastUpdatedDate = req.body.bug_creationDate;   //need not to be given for new bugs
+        var bug_assignee = req.body.feature_assignee;
+        var bug_loggedBy = req.user.local.email;
+        var bug_location = req.body.bug_location;
+        var bug_status =   req.body.bug_status;
+        var bug_priority = req.body.bug_priority;
 
-        var newFeature = new Feature({
-            feature: feature,
-            featureCreatedBy: featureCreatedBy,
-            featureDescription: featureDescription,
-            featureAssignee: featureAssignee,
-            featureStackHolders: featureStackHolders,
+        var newBug = new Bug({
+            feature_id: feature_id,
+            bug_title: bug_title,
+            bug_description: bug_description,
+            bug_screenshot: bug_screenshot,
+            bug_creationDate: bug_creationDate,
+            bug_lastUpdatedDate: bug_lastUpdatedDate,
+            bug_assignee: bug_assignee,
+            bug_loggedBy: bug_loggedBy,
+            bug_location: bug_location,
+            bug_status: bug_status,
+            bug_priority: bug_priority,
+
         });
-        Feature.createFeature(newFeature, function(err, feature) {
+        Bug.createBug(newBug, function(err, bug) {
             if (err)
                 throw err;
-            console.log(feature);
+            console.log(bug);
         });
         res.redirect('/profile');
     });
-*/
+
 
 
 
