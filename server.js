@@ -8,6 +8,7 @@ var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
+var cloudinary = require('cloudinary');
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -19,6 +20,15 @@ var configDB = require('./config/database.js');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
+
+// Image Upload configuration ===============================================================
+cloudinary.config({ 
+  cloud_name: 'bugmonitoringsystem', 
+  api_key: '122844961576727', 
+  api_secret: '1rI_OqHfRRPaRu2N5ZStM3Ej5OY' 
+});
+
+
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -39,7 +49,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
 
 
 

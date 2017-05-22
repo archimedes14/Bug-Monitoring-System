@@ -55,17 +55,29 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
 
+
+    /* For Feature Collection */
     var Feature = require('./models/feature');
+    Feature.createFeature = function(newFeature, callback) {
+    newFeature.save(callback);}
+    /*-----------------------------------------------------------*/
+
+
+    /* For Bug Collection */
+    var Bug = require('./models/bug');
+    Bug.createBug = function(newBug, callback) {
+    newBug.save(callback);}
+    /*-----------------------------------------------------------*/
 
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
             user: req.user // get the user out of session and pass to template
         });
     });
-    //--------------------------------------display Feature---
-    //--------------------------------------------------------
-    //--------------------------------------------------------
-    //--------------------------------------------------------
+    //======================================
+    // VIEW FEATURE=========================
+    //======================================
+    //var Feature = require('./models/feature');
     app.get('/display', function(req, res) {
         Feature.find(function(err, Feature) {
             if (err) {
@@ -89,14 +101,12 @@ module.exports = function(app, passport) {
         var featureAssignee = req.body.featureAssignee;
         var featureStackHolders = req.body.myInputs;
 
-        console.log(featureCreatedBy);
-
         var newFeature = new Feature({
             feature: feature,
             featureCreatedBy: featureCreatedBy,
             featureDescription: featureDescription,
             featureAssignee: featureAssignee,
-            featureStackHolders: featureStackHolders
+            featureStackHolders: featureStackHolders,
         });
         Feature.createFeature(newFeature, function(err, feature) {
             if (err)
@@ -109,23 +119,65 @@ module.exports = function(app, passport) {
     //=====================================
     // BUGS LIST ==========================
     //=====================================
-
-    app.get('/profile/:id/bugs', isLoggedIn, function(req, res) {
+    app.get('/profile/:id/:name/bugs', isLoggedIn, function(req, res) {
         //res.send('user '+req.params.id+' bugs');
         //console.log('user '+req.feature.feature+' bugs');
-        console.log(req.Feature);
         res.render('bugs.ejs', {
             user: req.user, // get the user out of session and pass to template
-            feature: req.params.id
+            feature: req.params.id,
+            feature_name:req.params.name
         });
     });
+
     //=====================================
-    // BUGS REGISTRATION ==================
+    // BUGS REGISTRATION PAGE==============
     //=====================================
 
-    app.get('/bug_registration', isLoggedIn, function(req, res) {
-        res.render('bug_registration.ejs');
+    app.get('/profile/:id/:name/bug_registration', isLoggedIn, function(req, res) {
+        res.render('bug_registration.ejs', {
+            user: req.user, // get the user out of session and pass to template
+            feature: req.params.id,
+            feature_name:req.params.name
+        });
     });
+  
+
+
+   /* //======================================
+    // ADD BUG ===============================
+    //========================================
+    
+
+    app.post('/profile/:id/bug_registration', function(req, res) {
+        var feature_id: req.params.id,
+        var bug_title: req.body.bug_title,
+        var bug_description: req.body.bug_description,
+        var bug_screenshot: [String],    /// keep it blank, will integrate cloudinary into it
+        var bug_creationDate: req.body.bug_creationDate,
+        //var bug_lastUpdatedDate: req.body.bug_creationDate,   //need not to be given for new bugs
+        var bug_assignee: [String],                //needs to populated from Feature StackHolder
+        var bug_loggedBy: req.user.local.email,
+        var bug_location: req.body.bug_location,
+        var bug_status:   req.body.bug_status,
+        var bug_priority: req.body.bug_creationDate
+
+        var newFeature = new Feature({
+            feature: feature,
+            featureCreatedBy: featureCreatedBy,
+            featureDescription: featureDescription,
+            featureAssignee: featureAssignee,
+            featureStackHolders: featureStackHolders,
+        });
+        Feature.createFeature(newFeature, function(err, feature) {
+            if (err)
+                throw err;
+            console.log(feature);
+        });
+        res.redirect('/profile');
+    });
+*/
+
+
 
 
     // =====================================

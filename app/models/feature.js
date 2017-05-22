@@ -6,12 +6,8 @@ var FeatureSchema = mongoose.Schema({
   featureCreatedBy: String,
   featureDescription: String,
   featureAssignee: String,
-  featureStackHolders: [String]
+  featureStackHolders: [String],
 });
 
-var Feature = mongoose.model('Feature', FeatureSchema);
-module.exports = Feature;
+module.exports = mongoose.model('Feature', FeatureSchema);
 
-module.exports.createFeature = function(newFeature, callback) {
-  newFeature.save(callback);
-}

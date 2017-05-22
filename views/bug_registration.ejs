@@ -28,6 +28,11 @@
       word-wrap: break-word;
       position: relative; 
     }
+    .bar {
+    height: 18px;
+    background: green;
+  }
+
   </style>
   
   <!-- Favicon and touch icons -->
@@ -53,12 +58,33 @@
     </ul>
   </div>
 </nav>
+<div class="row">
+<!-- LOCAL INFORMATION -->
+      <div class="col-sm-3">
+        <div class="well">
+          <h3><span class="fa fa-user"></span> Local</h3>
+
+          <p>
+            <strong>email</strong>:
+            <%= user.local.email %><br>
+          </p>
+          <p>
+            <strong>Feature ID</strong>:
+            <%= feature %><br>
+          </p>
+          <p>
+            <strong>Feature Name</strong>:
+            <%= feature_name %><br>
+          </p>
+        </div>
+      </div>
+    
 
 
 <!--Bug Registration Form -->
 <div class="container">
 
-    <form class="well form-horizontal" action=" " method="post"  id="bug_form">
+<form class="well form-horizontal" action="/profile/<%= feature %>/bug_registration" method="post"  id="bug_form">
 <fieldset>
 
 <!-- Form Name -->
@@ -201,7 +227,8 @@
 <div class="form-group">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
-    <button type="submit" class="btn btn-warning" >Submit<span class="glyphicon glyphicon-send"></span></button>
+    <button type="submit" class="btn btn-warning" >Submit
+    <span class="glyphicon glyphicon-send"></span></button>
   </div>
 </div>
 
@@ -210,6 +237,14 @@
 </div>
 </div>
 <!-- /.container -->
+</div>
+
+
+
+
+
+
+
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
