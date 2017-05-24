@@ -9,8 +9,8 @@ app.controller('mainController', function($scope,$http) {
       $scope.showFeature = function(feature) {
   	  $location.path('profile/'+features._id+'bugs'); 
 	}; 
-    });    
-  });
+   });
+});
 
 
 
