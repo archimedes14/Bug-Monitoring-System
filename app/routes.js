@@ -148,24 +148,24 @@ module.exports = function(app, passport) {
     //========================================
     
     app.post('/profile/:id/bug_registration', function(req, res) {
-        
+        backURL=req.header('Referer') || '/';        
         var feature_id = req.body.feature_id;
         var bug_title = req.body.bug_title;
         var bug_description = req.body.bug_description;
-        var bug_screenshot = [String];    /// keep it blank, will integrate cloudinary into it
+        //var bug_screenshot = req.body.input-6;    /// will upload in seperate page
         var bug_creationDate = req.body.bug_creationDate;
-        var bug_lastUpdatedDate = req.body.bug_creationDate;   //need not to be given for new bugs
+        var bug_lastUpdatedDate = req.body.bug_creationDate;   
         var bug_assignee = req.body.feature_assignee;
         var bug_loggedBy = req.user.local.email;
         var bug_location = req.body.bug_location;
         var bug_status =   req.body.bug_status;
         var bug_priority = req.body.bug_priority;
+        console.log(req.body.bug_creationDate);
 
         var newBug = new Bug({
             feature_id: feature_id,
             bug_title: bug_title,
             bug_description: bug_description,
-            bug_screenshot: bug_screenshot,
             bug_creationDate: bug_creationDate,
             bug_lastUpdatedDate: bug_lastUpdatedDate,
             bug_assignee: bug_assignee,
@@ -180,7 +180,7 @@ module.exports = function(app, passport) {
                 throw err;
             console.log(bug);
         });
-        res.redirect('/profile');
+        res.redirect(backURL);
     });
 
 

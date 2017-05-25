@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <style>
-    body {
+   body {
+      padding-top:80px; 
       word-wrap: break-word;
       position: relative; 
     }
-    
+  
   </style>
 
   <!-- CSS   -->
@@ -19,9 +20,9 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">     
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 
- <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/form-elements.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/form-elements.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
   <link rel="stylesheet" ; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 
@@ -34,6 +35,19 @@
   <link rel="/public/apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
+<!--Navigation Bar-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile">Bug Monitoring System</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="javascript:history.back()">Back</a></li>
+      <li><a href="/"><i class="glyphicon glyphicon-log-out"></i>  Logout</a></li>
+    </ul>
+  </div>
+</nav>
   
   <div class="container">
     <div class="page-header text-center">
@@ -62,7 +76,7 @@
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-plus-square" aria-hidden="true"></span> Report Bug </h3>
-          <a href = "/profile/<%=feature._id%>/bug_registration" class="btn btn-default btn-sm" role="button">ADD</a>
+          <a href = "/profile/<%=feature._id%>/bug_registration" role="button">Report !</a>
         </div>
       </div>
       
@@ -71,7 +85,7 @@
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-pencil-square-o" aria-hidden="true"></span> Update feature </h3>
-          <button type="button1" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-register" disabled>UPDATE</button>
+          <button type="button1" class="btn btn-default btn-sm disabled" data-toggle="modal" data-target="#modal-register">UPDATE</button>
         </div>
       </div>
       <%} else {%>
@@ -89,7 +103,7 @@
         <div class="well" >
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button1" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-register" disabled>DELETE</button>
+          <button type="button1" class="btn btn-default btn-sm disabled" data-toggle="modal" data-target=" " >DELETE</button>
         </div>
       </div>
       <%} else {%>
@@ -97,10 +111,11 @@
         <div class="well" >
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button1" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-register">DELETE</button>
+          <button type="button1" class="btn btn-default btn-sm " data-toggle="modal" data-target=" ">DELETE</button>
         </div>
       </div>
       <%}%>
+
     </div>
   </div>
 </div>
@@ -154,11 +169,11 @@
 
   -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-  <script src="assets/js/appdisplay.js"></script>
+  <script src="/assets/js/appdisplay.js"></script>
 
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/jquery.backstretch.min.js"></script>
-  <script src="assets/js/scripts.js"></script>
+  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/jquery.backstretch.min.js"></script>
+  <script src="/assets/js/scripts.js"></script>
 
 
 

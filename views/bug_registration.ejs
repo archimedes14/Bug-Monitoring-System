@@ -17,14 +17,14 @@
   <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
 
 <!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />-->
 
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
 
   <style>
     body {
-      padding-top:80px; 
+      padding-top:100px; 
       word-wrap: break-word;
       position: relative; 
     }
@@ -58,29 +58,14 @@
     </ul>
   </div>
 </nav>
+<div class="container">
+    <div class="page-header text-center">
+      <h1><span class="fa fa-anchor"></span>Report Bug</h1>
+      <h4> <strong> Feature ID : </strong> <%= feature._id %></h4>
+      <h4> <strong> Feature Name : </strong> <%= feature.feature %></h4>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>      
+    </div>
 <div class="row">
-<!-- LOCAL INFORMATION -->
-      <div class="col-sm-3">
-        <div class="well">
-          <h3><span class="fa fa-user"></span> Local</h3>
-
-          <p>
-            <strong>email</strong>:
-            <%= user.local.email %><br>
-          </p>
-          <p>
-            <strong>Feature ID</strong>:
-            <%= feature._id %><br>
-          </p>
-          <p>
-            <strong>Feature Name</strong>:
-            <%= feature.feature %><br>
-          </p>
-        </div>
-      </div>
-    
-
-
 <!--Bug Registration Form -->
 <div class="container">
 
@@ -135,17 +120,6 @@
   </div>
 </div>
 
-<!-- Image input-->
-
-<div class="form-group">
-  <label class="col-md-4 control-label">Bug Screenshot</label>  
-  <div class="col-md-4 inputGroupContainer">
-    <label class="control-label">Select File</label>
-    <input id="input-6" name="input6[]" type="file" multiple class="file-loading">
-  </div>
-</div>
-
-
 <!-- Text input-->
 
 <div class="form-group">
@@ -197,17 +171,17 @@
                         <div class="col-md-4">                           
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="PROGRESS" /> Progress
+                                    <input type="radio" name="bug_status" value="PROGRESS" /> Progress
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="FIXED" /> Fixed
+                                    <input type="radio" name="bug_status" value="FIXED" /> Fixed
                                 </label>
                             </div>                            
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="CLOSED" /> Closed
+                                    <input type="radio" name="bug_status" value="CLOSED" /> Closed
                                 </label>
                             </div>
                         </div>
@@ -219,27 +193,27 @@
                         <div class="col-md-4">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="IGNORABLE" /> Ignorable
+                                    <input type="radio" name="bug_priority" value="IGNORABLE" /> Ignorable
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="MINOR" /> Minor
+                                    <input type="radio" name="bug_priority" value="MINOR" /> Minor
                                 </label>
                             </div>                            
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="MAJOR" /> Major
+                                    <input type="radio" name="bug_priority" value="MAJOR" /> Major
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="CRITICAL" /> Critical
+                                    <input type="radio" name="bug_priority" value="CRITICAL" /> Critical
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="bug_location" value="BLOCKER" /> Blocker
+                                    <input type="radio" name="bug_priority" value="BLOCKER" /> Blocker
                                 </label>
                             </div>
                         </div>
@@ -261,21 +235,18 @@
 <!-- /.container -->
 </div>
 
-
-
-
-
-
-
-
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/assets/js/jquery.ui.widget.js"></script>
+<script src="/assets/js/jquery.iframe-transport.js"></script>
+<script src="/assets/js/jquery.fileupload.js"></script>
+<script src="/assets/js/jquery.cloudinary.js"></script>
 
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 <script>
+
   $(document).ready(function(){
     var date_input=$('input[name="bug_creationDate"]'); //our date input has the name "date"
     var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
