@@ -59,15 +59,17 @@ module.exports = function(app, passport) {
     /* For Feature Collection */
     var Feature = require('./models/feature');
     Feature.createFeature = function(newFeature, callback) {
-    newFeature.save(callback);}
-    /*-----------------------------------------------------------*/
+            newFeature.save(callback);
+        }
+        /*-----------------------------------------------------------*/
 
 
     /* For Bug Collection */
     var Bug = require('./models/bug');
     Bug.createBug = function(newBug, callback) {
-    newBug.save(callback);}
-    /*-----------------------------------------------------------*/
+            newBug.save(callback);
+        }
+        /*-----------------------------------------------------------*/
 
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
@@ -79,18 +81,18 @@ module.exports = function(app, passport) {
     //======================================
     //var Feature = require('./models/feature');
     app.get('/display', function(req, res) {
-        Feature.find(function(err, Feature) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.json(Feature)
-            }
-        });
-    })
-    //======================================
-    // ADD FEATURE =========================
-    //======================================
-    //var Feature = require('./models/feature');
+            Feature.find(function(err, Feature) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(Feature)
+                }
+            });
+        })
+        //======================================
+        // ADD FEATURE =========================
+        //======================================
+        //var Feature = require('./models/feature');
 
     app.post('/feature', function(req, res) {
         var feature = req.body.featureName;
@@ -119,13 +121,13 @@ module.exports = function(app, passport) {
     //=====================================
     app.get('/profile/:id/bugs', isLoggedIn, function(req, res) {
         //console.log('user '+req.feature.feature+' bugs');
-        Feature.find({"_id":req.params.id},
-        function(err, feature){
-            res.render('bugs.ejs',{
-                user: req.user, // get the user out of session and pass to template
-                feature: feature[0]
+        Feature.find({ "_id": req.params.id },
+            function(err, feature) {
+                res.render('bugs.ejs', {
+                    user: req.user, // get the user out of session and pass to template
+                    feature: feature[0]
+                });
             });
-        });
     });
 
     //=====================================
@@ -133,32 +135,32 @@ module.exports = function(app, passport) {
     //=====================================
 
     app.get('/profile/:id/bug_registration', isLoggedIn, function(req, res) {
-        Feature.find({"_id":req.params.id},
-        function(err, feature){
-            console.log(feature);
-            res.render('bug_registration.ejs', {
-                user: req.user, // get the user out of session and pass to template
-                feature: feature[0]
+        Feature.find({ "_id": req.params.id },
+            function(err, feature) {
+                console.log(feature);
+                res.render('bug_registration.ejs', {
+                    user: req.user, // get the user out of session and pass to template
+                    feature: feature[0]
+                });
             });
-        });
     });
 
     //========================================
     // ADD BUG ===============================
     //========================================
-    
+
     app.post('/profile/:id/bug_registration', function(req, res) {
-        backURL=req.header('Referer') || '/';        
+        backURL = req.header('Referer') || '/';
         var feature_id = req.body.feature_id;
         var bug_title = req.body.bug_title;
         var bug_description = req.body.bug_description;
         //var bug_screenshot = req.body.input-6;    /// will upload in seperate page
         var bug_creationDate = req.body.bug_creationDate;
-        var bug_lastUpdatedDate = req.body.bug_creationDate;   
+        var bug_lastUpdatedDate = req.body.bug_creationDate;
         var bug_assignee = req.body.feature_assignee;
         var bug_loggedBy = req.user.local.email;
         var bug_location = req.body.bug_location;
-        var bug_status =   req.body.bug_status;
+        var bug_status = req.body.bug_status;
         var bug_priority = req.body.bug_priority;
         console.log(req.body.bug_creationDate);
 
@@ -182,14 +184,29 @@ module.exports = function(app, passport) {
         });
         res.redirect(backURL);
     });
+    //======================================
+    // VIEW BUG=============================
+    //======================================
+    //var Bug = require('./models/bug');====
+    app.get('/displaybug', isLoggedIn, function(req, res) {
+        //console.log(req.query.id)
+        Bug.find({ "feature_id":((req.query.id).trim())}, 
+            function(err, Bug) {
+                if (err) {
+                    throw err;
+                    console.log("Error");
+                } else {
+                    console.log(err,Bug);
+                    res.json(Bug)
+                   
+                }
+            });
+    });
 
 
-
-
-
-    // =====================================
-    // LOGOUT ==============================
-    // =====================================
+// =====================================
+// LOGOUT ==============================
+// =====================================
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
