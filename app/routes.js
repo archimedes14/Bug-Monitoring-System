@@ -119,17 +119,28 @@ module.exports = function(app, passport) {
     //=====================================
     // FEATURE UPDATE =====================
     //=====================================
-    app.post('/:id/featureupdate', function(req,res){
+    app.post('/:id/featureupdate', isLoggedIn, function(req,res){
         backURL = req.header('Referer') || '/';
         var NewfeatureDescription = req.body.featureDescription;
-        console.log(req.params.id);
-        console.log(NewfeatureDescription);
         Feature.update({"_id" : req.params.id}, {
            featureDescription : NewfeatureDescription
         }, function(err, affected, resp) {
             console.log(resp);
         });
         res.redirect(backURL);
+    });
+
+    //=====================================
+    // FEATURE DELETE =====================
+    //=====================================
+    app.post('/:id/featuredelete', isLoggedIn, function(req,res){
+         Feature.findOneAndRemove({"_id" : req.params.id}, function(err, feature){
+            if(err){
+                throw err;
+            }
+            console.log(feature);
+        })
+        res.redirect('/profile');
     });
 
     //=====================================

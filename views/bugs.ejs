@@ -85,14 +85,14 @@
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-pencil-square-o" aria-hidden="true"></span> Update feature </h3>
-          <button type="button" class="btn btn-primary btn-sm disabled" data-toggle="modal" data-target=" ">UPDATE</button>
+            <button type="button" class="btn btn-primary btn-sm disabled" data-toggle="modal" data-target=" ">UPDATE</button>
         </div>
       </div>
       <%} else {%>
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-pencil-square-o" aria-hidden="true"></span> Update feature </h3>
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-update">UPDATE</button>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-update">UPDATE</button>
         </div>
       </div>
       <%}%>
@@ -110,12 +110,12 @@
         <form role="form" action="/<%=feature._id%>/featureupdate" method="post" class="registration-form">
             <div class="form-group container-fluid">
               <br>
-              <h4>  Add the new description </h4>
-              <label class="sr-only" for="form-about-yourself">Feature Description</label>
-              <textarea name="featureDescription" placeholder="Feature Description..." class="form-about-yourself form-control" id="form-feature-description"></textarea>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary btn-sm container-fluid">Update Feature!</button>
+                <h4>  Add the new description </h4>
+                  <label class="sr-only" for="form-about-yourself">Feature Description</label>
+                  <textarea name="featureDescription" placeholder="Feature Description..." class="form-about-yourself form-control" id="form-feature-description"></textarea>
+              </div>
+              <br>
+                <button type="submit" class="btn btn-primary btn-sm container-fluid">Update Feature!</button>
           </form>
         </div>
       </div>
@@ -127,7 +127,11 @@
         <div class="well" >
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button" class="btn btn-danger btn-sm disabled" data-toggle="modal" data-target=" " >DELETE</button>
+            <form action="/<%=feature._id%>/featuredelete" method="post">
+              <div class = "form-group">
+                <button type="submit" class="btn btn-danger btn-sm disabled">DELETE</button>
+              </div>
+          </form>
         </div>
       </div>
       <%} else {%>
@@ -135,7 +139,11 @@
         <div class="well" >
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=" ">DELETE</button>
+            <form action="/<%=feature._id%>/featuredelete" method="post">
+              <div class = "form-group">
+                <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+              </div>
+            </form>
         </div>
       </div>
       <%}%>
