@@ -117,6 +117,22 @@ module.exports = function(app, passport) {
     });
 
     //=====================================
+    // FEATURE UPDATE =====================
+    //=====================================
+    app.post('/:id/featureupdate', function(req,res){
+        backURL = req.header('Referer') || '/';
+        var NewfeatureDescription = req.body.featureDescription;
+        console.log(req.params.id);
+        console.log(NewfeatureDescription);
+        Feature.update({"_id" : req.params.id}, {
+           featureDescription : NewfeatureDescription
+        }, function(err, affected, resp) {
+            console.log(resp);
+        });
+        res.redirect(backURL);
+    });
+
+    //=====================================
     // BUGS LIST ==========================
     //=====================================
     app.get('/profile/:id/bugs', isLoggedIn, function(req, res) {

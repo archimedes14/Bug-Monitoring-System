@@ -26,7 +26,6 @@
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
   <link rel="stylesheet" ; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 
- 
   <!-- Favicon and touch icons -->
   <link rel="shortcut icon" href="assets/ico/favicon.png">
   <link rel="/public/apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
@@ -86,17 +85,41 @@
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-pencil-square-o" aria-hidden="true"></span> Update feature </h3>
-          <button type="button1" class="btn btn-default btn-sm disabled" data-toggle="modal" data-target="#modal-register">UPDATE</button>
+          <button type="button" class="btn btn-primary btn-sm disabled" data-toggle="modal" data-target=" ">UPDATE</button>
         </div>
       </div>
       <%} else {%>
       <div class="col-sm-3">
         <div class="well">
           <h3><span class="fa fa-pencil-square-o" aria-hidden="true"></span> Update feature </h3>
-          <button type="button1" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-register">UPDATE</button>
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-update">UPDATE</button>
         </div>
       </div>
       <%}%>
+
+      <!-- MODAL -->
+      <div class="modal fade container-fluid" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modal-update-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+          <h3 class="modal-title" id="modal-register-label">Update Feature Description</h3>
+       </div>
+        <form role="form" action="/<%=feature._id%>/featureupdate" method="post" class="registration-form">
+            <div class="form-group container-fluid">
+              <br>
+              <h4>  Add the new description </h4>
+              <label class="sr-only" for="form-about-yourself">Feature Description</label>
+              <textarea name="featureDescription" placeholder="Feature Description..." class="form-about-yourself form-control" id="form-feature-description"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-sm container-fluid">Update Feature!</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
       <!-- Delete feature -->
       <%if (user.local.email != feature.featureCreatedBy) {%>
@@ -104,7 +127,7 @@
         <div class="well" >
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button1" class="btn btn-default btn-sm disabled" data-toggle="modal" data-target=" " >DELETE</button>
+          <button type="button" class="btn btn-danger btn-sm disabled" data-toggle="modal" data-target=" " >DELETE</button>
         </div>
       </div>
       <%} else {%>
@@ -112,7 +135,7 @@
         <div class="well" >
           <h3><span class="fa fa-trash" aria-hidden="true"></span> 
           Delete feature </h3>
-          <button type="button1" class="btn btn-default btn-sm " data-toggle="modal" data-target=" ">DELETE</button>
+          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=" ">DELETE</button>
         </div>
       </div>
       <%}%>
@@ -180,7 +203,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
   <script src="/assets/js/appdisplay2.js"></script>
 
-  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="/assets/js/jquery.backstretch.min.js"></script>
   <script src="/assets/js/scripts.js"></script>
 
