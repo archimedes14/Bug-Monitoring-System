@@ -2,7 +2,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 
-> Bug Tracking and Monitoring System for IT Teams to Report Bugs and Developers to Prioritize using the Tool. 
+> Ticket Tracking and Monitoring System for IT Teams to Report Bugs and Developers to Prioritize using the Tool. 
 
 
 
