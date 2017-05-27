@@ -13,8 +13,14 @@
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
 
 
-# Try-it (Development Mode)
+### Try-it (Development Mode)
 
-http://shielded-depths-91101.herokuapp.com/
+> Clone the Repository (Dependencies Installed) and start the server with ```npm start``` and go to http:localhost:8080/.
+
+
+
+### Try-it (Deployment Mode)
+
+[1]: http://shielded-depths-91101.herokuapp.com/
 
 > Runs on http mode only not on https, please allow all http requests. 
