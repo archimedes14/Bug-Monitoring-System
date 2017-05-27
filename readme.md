@@ -21,6 +21,6 @@
 
 ### Try-it (Deployment Mode)
 
-[1]: http://shielded-depths-91101.herokuapp.com/
+<http://shielded-depths-91101.herokuapp.com/>
 
 > Runs on http mode only not on https, please allow all http requests. 
