@@ -119,11 +119,11 @@ module.exports = function(app, passport) {
     //=====================================
     // FEATURE UPDATE =====================
     //=====================================
-    app.post('/:id/featureupdate', isLoggedIn, function(req,res){
+    app.post('/:id/featureupdate', isLoggedIn, function(req, res) {
         backURL = req.header('Referer') || '/';
         var NewfeatureDescription = req.body.featureDescription;
-        Feature.update({"_id" : req.params.id}, {
-           featureDescription : NewfeatureDescription
+        Feature.update({ "_id": req.params.id }, {
+            featureDescription: NewfeatureDescription
         }, function(err, affected, resp) {
             console.log(resp);
         });
@@ -133,9 +133,9 @@ module.exports = function(app, passport) {
     //=====================================
     // FEATURE DELETE =====================
     //=====================================
-    app.post('/:id/featuredelete', isLoggedIn, function(req,res){
-         Feature.findOneAndRemove({"_id" : req.params.id}, function(err, feature){
-            if(err){
+    app.post('/:id/featuredelete', isLoggedIn, function(req, res) {
+        Feature.findOneAndRemove({ "_id": req.params.id }, function(err, feature) {
+            if (err) {
                 throw err;
             }
             console.log(feature);
@@ -217,23 +217,66 @@ module.exports = function(app, passport) {
     //var Bug = require('./models/bug');====
     app.get('/displaybug', isLoggedIn, function(req, res) {
         //console.log(req.query.id)
-        Bug.find({ "feature_id":((req.query.id).trim())}, 
+        Bug.find({ "feature_id": ((req.query.id).trim()) },
             function(err, Bug) {
                 if (err) {
                     throw err;
                     console.log("Error");
                 } else {
-                    console.log(err,Bug);
+                    console.log(err, Bug);
                     res.json(Bug)
-                   
+
                 }
             });
     });
 
+    //======================================
+    // BUG DESCRIPTION PAGE=================
+    //======================================
+    //===var Bug = require('./models/bug')=
+    app.get('/profile/:fid/:id/bugdetail', isLoggedIn, function(req, res) {
+        Bug.find({ "_id": req.params.id },
+            function(err, bug) {
+                res.render('bug_desc.ejs', {
+                    user: req.user, // get the user out of session and pass to template
+                    bug: bug[0]
+                });
+            });
+    });
+    //=====================================
+    // BUG STATUS UPDATE ===================
+    //======================================
+    app.post('/:id/bugStatusUpdate', isLoggedIn, function(req, res) {
+        backURL = req.header('Referer') || '/';
+        var Newbug_status = req.body.bug_status;
+        Bug.update({ "_id": req.params.id }, {
+            bug_status: Newbug_status,
+            bug_lastUpdatedDate: Date()
+        }, function(err, affected, resp) {
+            console.log(resp);
+        });
+        res.redirect(backURL);
+    });
 
-// =====================================
-// LOGOUT ==============================
-// =====================================
+    //=====================================
+    // BUG PRIORITY UPDATE ===================
+    //======================================
+    app.post('/:id/bugPriorityUpdate', isLoggedIn, function(req, res) {
+        backURL = req.header('Referer') || '/';
+        var Newbug_priority = req.body.bug_priority;
+        Bug.update({ "_id": req.params.id }, {
+            bug_priority: Newbug_priority,
+            bug_lastUpdatedDate: Date()
+        }, function(err, affected, resp) {
+            console.log(resp);
+        });
+        res.redirect(backURL);
+    });
+
+
+    // =====================================
+    // LOGOUT ==============================
+    // =====================================
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');

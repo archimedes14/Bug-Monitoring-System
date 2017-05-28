@@ -194,7 +194,7 @@
     <tbody>
       <tr ng-repeat="x in bugs | filter:searchBug" ng-click="showBug(bug)">
         <td>{{$index+1}}</td>        
-        <td>{{ x.bug_title }}</td>
+        <td><a ng-href="{{x._id}}/bugdetail">{{ x.bug_title }}</td>
         <td>{{ x.bug_description}}</td>
         <td>{{ x.bug_location}}</td>
         <td data-title="'bug_status'" sortable="'bug_status'">

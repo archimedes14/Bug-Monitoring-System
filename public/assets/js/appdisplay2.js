@@ -17,8 +17,8 @@ app.controller('mainController', function($scope,$http) {
     .success(function(data){
       $scope.bugs =data;
       $scope.searchBug = '';
-      $scope.showBug = function(bug) {
-  	  $location.path('profile/'+bug._id+'bugs'); 
+      $scope.showBug = function(bug) {  
+  	  $location.path(bug._id+'bugdetail'); 
 	}; 
    });
 });

@@ -1,0 +1,245 @@
+<!-- views/bugs.ejs -->
+<!doctype html>
+<html>
+
+<head>
+  <title>Bugs Monitoring System</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+  <style>
+   body {
+      padding-top:30px; 
+      word-wrap: break-word;
+      position: relative; 
+    }
+    .row{
+    margin-top:40px;
+    padding: 0 10px;
+    }
+
+  .clickable{
+    cursor: pointer;   
+    }
+
+  .panel-heading span {
+  margin-top: -20px;
+  font-size: 15px;
+    }
+  
+  </style>
+  <!-- Sweet Alert -->
+  <link data-require="sweet-alert@*" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.css" />
+  <script data-require="sweet-alert@*" data-semver="0.4.2" src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.js"></script>
+   
+  <!-- CSS   -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">     
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+
+  <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/form-elements.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" ; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+
+  <!-- Favicon and touch icons -->
+  <link rel="shortcut icon" href="assets/ico/favicon.png">
+  <link rel="/public/apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="/public/apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="/public/apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="/public/apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+<!--Navigation Bar-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile">Bug Monitoring System</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="javascript:history.back()">Back</a></li>
+      <li><a href="/"><i class="glyphicon glyphicon-log-out"></i>  Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Description of page-->
+  <div class="container">
+    <div class="page-header text-center">
+      <h1><span class="fa fa-anchor"></span>Bug Description</h1>
+      <h4> <strong> Bug Title : </strong><%=bug.bug_title%></h4>
+      <h4> <strong> Bug Description: </strong><div id="extract_des"><%=bug.bug_description%></div></h4>
+       <h4> <strong> Bug Reported Since: </strong><%=bug.bug_creationDate%></h4>
+       <h4> <strong> Bug Last Updated: </strong><%=bug.bug_lastUpdatedDate%></h4>
+      <h4><strong>Email:</strong>:<%= user.local.email %></h4>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>      
+    </div>
+</div>
+
+<!-- Bug Detail-->
+<div class="container">
+    <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Bug Status</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <h4><strong>Current Status:</strong><%=bug.bug_status%></h4>
+            <%if (user.local.email != bug.bug_assignee) {%>
+            <span class="label label-warning">Can only be updated by: <%=bug.bug_assignee%></span>
+            <button type="button" class="btn btn-info disabled" data-toggle="tooltip" data-placement="bottom" title="Can Only Be Changed by  <%=bug.bug_assignee%>">Update Status</button><%} else {%>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-status">Update Status</button><%}%>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Bug Priority</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <h4><strong>Current Priority:</strong><%=bug.bug_priority%></h4>
+            <%if (user.local.email != bug.bug_loggedBy) {%>
+            <span class="label label-warning">Can only be updated by: <%=bug.bug_loggedBy%></span>
+            <button type="button" class="btn btn-info disabled" data-toggle="tooltip" data-placement="bottom" title="Can Only Be Changed by  <%=bug.bug_loggedBy%>">Update Priority</button><%} else {%>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-priority">Update Priority</button>
+            <%}%>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+ <!-- MODAL BUG STATUS -->
+      <div class="modal fade container-fluid" id="modal-status" tabindex="-1" role="dialog" aria-labelledby="modal-update-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h3 class="modal-title" id="modal-register-label">Update Bug Status</h3>
+       </div>
+        <form role="form" action="/<%=bug._id%>/bugStatusUpdate" method="post" class="registration-form">
+            <div class="form-group container-fluid">
+              <br>
+                <h4>Bug Status Update</h4>
+                  <label class="sr-only" for="form-about-yourself">Bug Status</label>            
+                    <select name="bug_status">
+                        <option value="PROGRESS">Progress</option>
+                        <option value="FIXED">Fixed</option>
+                        <option value="CLOSED">Closed</option>
+                    </select>
+              </div>
+              <br>
+                <button type="submit" class="btn btn-primary btn-sm container-fluid">Update Feature!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL BUG PRIORITY -->
+      <div class="modal fade container-fluid" id="modal-priority" tabindex="-1" role="dialog" aria-labelledby="modal-update-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h3 class="modal-title" id="modal-register-label">Update Bug Priority</h3>
+       </div>
+        <form role="form" action="/<%=bug._id%>/bugPriorityUpdate" method="post" class="registration-form">
+            <div class="form-group container-fluid">
+              <br>
+                <h4>Bug Priority Update</h4>
+                  <label class="sr-only" for="form-about-yourself">Bug Priority</label>           
+                    <select name="bug_priority">
+                        <option value="IGNORABLE">Ignorable</option>
+                        <option value="MINOR">Minor</option>
+                        <option value="MAJOR">Major</option>
+                        <option value="CRITICAL">Critical</option>
+                        <option value="BLOCKER">Blocker</option>
+                    </select>
+              </div>
+              <br>
+                <button type="submit" class="btn btn-primary btn-sm container-fluid">Update Feature!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment Section-->
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Screenshots</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <h4><strong>Under Construction</h4>
+            <button type="button" class="btn btn-info">Upload</button>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+
+
+<!-- Comment Section-->
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Comments</h3>
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <h4><strong>Under Construction</h4>
+            <button type="button" class="btn btn-info">New Comment</button>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+ 
+
+
+
+  
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/assets/js/jquery.backstretch.min.js"></script>
+  <script src="/assets/js/scripts.js"></script>
+  <!--Script for Panes-->
+<script >
+  $(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+  if(!$this.hasClass('panel-collapsed')) {
+    $this.parents('.panel').find('.panel-body').slideUp();
+    $this.addClass('panel-collapsed');
+    $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+  } else {
+    $this.parents('.panel').find('.panel-body').slideDown();
+    $this.removeClass('panel-collapsed');
+    $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+  }
+})
+</script>
+
+</body>
+</html>
