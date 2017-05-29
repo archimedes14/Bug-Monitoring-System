@@ -189,10 +189,6 @@
         <b>
           Bug Status        
         </td>
-        <td>
-        <b>
-          Bug Comment        
-        </td>
       </tr>
     </thead>
     <tbody>
@@ -203,8 +199,7 @@
         <td>{{ x.bug_location}}</td>
         <td data-title="'bug_status'" sortable="'bug_status'">
                 {{ x.bug_status}}
-        </td>
-        <td ng-repeat = "y in x.bug_comments"> {{y.comment_message}} </td>       
+        </td>  
       </tr>
     </tbody>
   </table>
