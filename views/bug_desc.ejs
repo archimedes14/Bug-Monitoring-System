@@ -26,7 +26,7 @@
   margin-top: -20px;
   font-size: 15px;
     }
-  
+
   </style>
   <!-- Sweet Alert -->
   <link data-require="sweet-alert@*" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.css" />
@@ -198,29 +198,24 @@
 
 <!-- Comment Section-->
 <div class="container" ng-app="sortApp" ng-controller="mainController">
-    <div class="row" ng-repeat="y in bugs">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title">Comments</h3>
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-        </div>
+<div class="row" ng-repeat="y in bugs">
 <!-- Comment Section layout -->
-  <div class="container" ng-repeat="x in y.bug_comments">
+  <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        <section class="comment-list">
-          <article class="row">
-            <div class="col-md-4 col-sm-4 hidden-xs">
-              <figure class="thumbnail">
-                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                <figcaption class="text-center">{{x.comment_by}}</figcaption>
-              </figure>
-            </div>
+        <h2 class = "page-header">Comments</h2>
+          <section class="comment-list">
+            <article class="row" ng-repeat="x in y.bug_comments">
+              <div class="col-md-4 col-sm-4 hidden-xs">
+                <figure class = "thumbnail">
+                  <img class="img-responsive" width="100" height="50" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg" />
+                  <figcaption class="figure-caption">{{x.comment_by}}</figcaption>
+                </figure>
+              </div>
             <div class="col-md-8 col-sm-8">
               <div class="panel panel-default arrow left">
                 <div class="panel-body">
                   <header class="text-left">
-                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o "></i>  {{ x.comment_time}}</time>
+                    <time class="comment-date"><i class="fa fa-clock-o "></i>  {{ x.comment_time}}</time>
                   </header>
                   <div class="comment-post">
                     <p>
@@ -232,7 +227,6 @@
             </div>
           </article>
       </section>
-    </div>
   </div>
 </div>
 
