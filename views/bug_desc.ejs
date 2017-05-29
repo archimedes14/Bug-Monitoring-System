@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">     
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 
+  <link href="/assets/css/comment-section.css" rel="stylesheet" type="text/css">
   <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/form-elements.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
@@ -69,6 +70,7 @@
   <div class="container">
     <div class="page-header text-center">
       <h1><span class="fa fa-anchor"></span>Bug Description</h1>
+      <h4> <strong> Bug id : </strong><div id="extract_id"> <%= bug._id %></div></h4>
       <h4> <strong> Bug Title : </strong><%=bug.bug_title%></h4>
       <h4> <strong> Bug Description: </strong><div id="extract_des"><%=bug.bug_description%></div></h4>
        <h4> <strong> Bug Reported Since: </strong><%=bug.bug_creationDate%></h4>
@@ -174,7 +176,7 @@
       </div>
     </div>
 
-    <!-- Comment Section-->
+    <!-- Screenshot Section-->
 <div class="container">
     <div class="row">
     <div class="col-md-12">
@@ -195,40 +197,74 @@
 
 
 <!-- Comment Section-->
-<div class="container">
-    <div class="row">
-    <div class="col-md-12">
+<div class="container" ng-app="sortApp" ng-controller="mainController">
+    <div class="row" ng-repeat="y in bugs">
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Comments</h3>
           <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
-        <div class="panel-body">
-            <h4><strong>Under Construction</h4>
-            <button type="button" class="btn btn-info">New Comment</button>
-        </div>
-      </div>
+<!-- Comment Section layout -->
+  <div class="container" ng-repeat="x in y.bug_comments">
+    <div class="row">
+      <div class="col-md-8">
+        <section class="comment-list">
+          <article class="row">
+            <div class="col-md-4 col-sm-4 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+                <figcaption class="text-center">{{x.comment_by}}</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o "></i>  {{ x.comment_time}}</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      {{x.comment_message}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+      </section>
     </div>
+  </div>
+</div>
+
+
+<!-- Adding comment feature -->
+        <form role="form" action="/<%=bug._id%>/comment" method="post" class="registration-form">
+          <div class="form-group container-fluid">
+            <div class="panel-body col-sm-9">
+              <textarea name="commentBody" placeholder="Write a comment..." class="form-about-yourself form-control" id="form-feature-description"></textarea>
+            </div>
+            <div class="panel-body col-sm-3">
+            <button type="submit" class="btn-sm btn-info" style = "margin-top: 5%">Leave a comment</button>
+            </div>
+          </div>
+        </form>
+      </div> 
     </div>
 </div>
 
- 
-
-
-
-  
-
-
-
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+  <script src="/assets/js/showcomments.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="/assets/js/jquery.backstretch.min.js"></script>
   <script src="/assets/js/scripts.js"></script>
+
+
   <!--Script for Panes-->
 <script >
   $(document).on('click', '.panel-heading span.clickable', function(e){
-    var $this = $(this);
+  var $this = $(this);
   if(!$this.hasClass('panel-collapsed')) {
     $this.parents('.panel').find('.panel-body').slideUp();
     $this.addClass('panel-collapsed');

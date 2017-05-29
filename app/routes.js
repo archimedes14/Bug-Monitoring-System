@@ -229,7 +229,23 @@ module.exports = function(app, passport) {
                 }
             });
     });
+    //==================================
+    // DISPLAY COMMENTS ================
+    //==================================
+    app.get('/displaycomments', isLoggedIn, function(req, res) {
+        console.log("Query " + req.query.id);
+        Bug.find({ "_id": ((req.query.id).trim()) },
+            function(err, Bug) {
+                if (err) {
+                    throw err;
+                    console.log("Error");
+                } else {
+                    console.log(err, Bug);
+                    res.json(Bug)
 
+                }
+            });
+    });
     //======================================
     // BUG DESCRIPTION PAGE=================
     //======================================
@@ -244,8 +260,8 @@ module.exports = function(app, passport) {
             });
     });
     //=====================================
-    // BUG STATUS UPDATE ===================
-    //======================================
+    // BUG STATUS UPDATE ==================
+    //=====================================
     app.post('/:id/bugStatusUpdate', isLoggedIn, function(req, res) {
         backURL = req.header('Referer') || '/';
         var Newbug_status = req.body.bug_status;
@@ -259,8 +275,34 @@ module.exports = function(app, passport) {
     });
 
     //=====================================
-    // BUG PRIORITY UPDATE ===================
-    //======================================
+    // BUG COMMENT POST ===================
+    //=====================================
+    app.post('/:id/comment', isLoggedIn,function(req, res){
+        backURL = req.header('Referer') || '/';
+        var currentdate = new Date();
+        var comment_body = req.body.commentBody;
+        var comment_by = req.user.local.email;
+        var comment_time = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+        var comment = {
+            comment_message: comment_body,
+            comment_time: comment_time,
+            comment_by: comment_by 
+        };
+        Bug.update({"_id": req.params.id},
+           {$push : {bug_comments:comment}}, function(err, affected, resp){
+            console.log(resp);
+           });
+
+        res.redirect(backURL);
+    });
+    //=====================================
+    // BUG PRIORITY UPDATE ================
+    //=====================================
     app.post('/:id/bugPriorityUpdate', isLoggedIn, function(req, res) {
         backURL = req.header('Referer') || '/';
         var Newbug_priority = req.body.bug_priority;

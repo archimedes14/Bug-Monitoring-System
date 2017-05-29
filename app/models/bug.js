@@ -11,7 +11,12 @@ var BugSchema = mongoose.Schema({
     bug_loggedBy: String,
     bug_location: String,
     bug_status: String,
-    bug_priority: String
+    bug_priority: String,
+    bug_comments: [{
+        comment_message: String,
+        comment_time: String,
+        comment_by: String
+    }]
 });
 
 module.exports = mongoose.model('Bug', BugSchema);
