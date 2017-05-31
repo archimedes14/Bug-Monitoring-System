@@ -277,26 +277,20 @@ module.exports = function(app, passport) {
     //=====================================
     // BUG COMMENT POST ===================
     //=====================================
-    app.post('/:id/comment', isLoggedIn,function(req, res){
+    app.post('/:id/comment', isLoggedIn, function(req, res) {
         backURL = req.header('Referer') || '/';
         var currentdate = new Date();
         var comment_body = req.body.commentBody;
         var comment_by = req.user.local.email;
-        var comment_time = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+        var comment_time = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
         var comment = {
             comment_message: comment_body,
             comment_time: comment_time,
-            comment_by: comment_by 
+            comment_by: comment_by
         };
-        Bug.update({"_id": req.params.id},
-           {$push : {bug_comments:comment}}, function(err, affected, resp){
+        Bug.update({ "_id": req.params.id }, { $push: { bug_comments: comment } }, function(err, affected, resp) {
             console.log(resp);
-           });
+        });
 
         res.redirect(backURL);
     });

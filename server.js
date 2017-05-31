@@ -22,10 +22,10 @@ var configDB = require('./config/database.js');
 mongoose.connect(configDB.url); // connect to our database
 
 // Image Upload configuration ===============================================================
-cloudinary.config({ 
-  cloud_name: 'bugmonitoringsystem', 
-  api_key: '122844961576727', 
-  api_secret: '1rI_OqHfRRPaRu2N5ZStM3Ej5OY' 
+cloudinary.config({
+    cloud_name: 'bugmonitoringsystem',
+    api_key: '122844961576727',
+    api_secret: '1rI_OqHfRRPaRu2N5ZStM3Ej5OY'
 });
 
 
@@ -44,7 +44,7 @@ app.use(express.static(__dirname + '/public'));
 
 // required for passport
 app.use(session({
-  secret: 'ilovescotchscotchyscotchscotch'
+    secret: 'ilovescotchscotchyscotchscotch'
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
