@@ -1,5 +1,22 @@
 // app/routes.js
+
+
 module.exports = function(app, passport) {
+
+var helper = require('sendgrid').mail;
+var fromEmail = new helper.Email('noreply@bugmonitoringsystem.com');
+var toEmail = new helper.Email('darpanjyoti.bora@gmail.com');
+var subject = 'Darpan Bora';
+var content = new helper.Content('text/html','A change has been observed in the state of the bug.');
+var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+mail.setTemplateId('70ba5ed5-0cf1-4622-a3fc-1f5bc56e46b7');
+
+var sg = require('sendgrid')('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');
+var request = sg.emptyRequest({
+  method: 'POST',
+  path: '/v3/mail/send',
+  body: mail.toJSON()
+});
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -271,6 +288,14 @@ module.exports = function(app, passport) {
         }, function(err, affected, resp) {
             console.log(resp);
         });
+        sg.API(request, function (error, response) {
+            if (error) {
+                console.log('Error response received: '+ error);
+              }
+              console.log(response.statusCode);
+              console.log(response.body);
+              console.log(response.headers);
+            });
         res.redirect(backURL);
     });
 
@@ -306,6 +331,14 @@ module.exports = function(app, passport) {
         }, function(err, affected, resp) {
             console.log(resp);
         });
+        sg.API(request, function (error, response) {
+            if (error) {
+                console.log('Error response received: '+ error);
+              }
+              console.log(response.statusCode);
+              console.log(response.body);
+              console.log(response.headers);
+            });
         res.redirect(backURL);
     });
 
