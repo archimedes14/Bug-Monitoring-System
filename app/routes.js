@@ -2,21 +2,37 @@
 
 
 module.exports = function(app, passport) {
+    // =====================================
+    // SEND GRID MAIL (with login links)==== 
+    // =====================================
 
-var helper = require('sendgrid').mail;
-var fromEmail = new helper.Email('noreply@bugmonitoringsystem.com');
-var toEmail = new helper.Email('darpanjyoti.bora@gmail.com');
-var subject = 'Darpan Bora';
-var content = new helper.Content('text/html','A change has been observed in the state of the bug.');
-var mail = new helper.Mail(fromEmail, subject, toEmail, content);
-mail.setTemplateId('70ba5ed5-0cf1-4622-a3fc-1f5bc56e46b7');
+    var helper = require('sendgrid').mail;
+    var fromEmail = new helper.Email('noreply@bugmonitoringsystem.com');
+    var toEmail = new helper.Email('darpanjyoti.bora@gmail.com');
+    var subject = 'Darpan Bora';
+    var content = new helper.Content('text/html', 'A change has been observed in the state of the bug.');
+    var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+    mail.setTemplateId('70ba5ed5-0cf1-4622-a3fc-1f5bc56e46b7');
 
-var sg = require('sendgrid')('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');
-var request = sg.emptyRequest({
-  method: 'POST',
-  path: '/v3/mail/send',
-  body: mail.toJSON()
-});
+    var sg = require('sendgrid')('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');
+    var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: mail.toJSON()
+    });
+
+    // =====================================
+    // IMAGE UPLOAD (CLOUDINARY)============ 
+    // =====================================
+
+    var cloudinary = require('cloudinary');
+    cloudinary.config({
+        cloud_name: 'bugmonitoringsystem',
+        api_key: '122844961576727',
+        api_secret: '1rI_OqHfRRPaRu2N5ZStM3Ej5OY'
+    });
+
+
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -288,14 +304,14 @@ var request = sg.emptyRequest({
         }, function(err, affected, resp) {
             console.log(resp);
         });
-        sg.API(request, function (error, response) {
+        sg.API(request, function(error, response) {
             if (error) {
-                console.log('Error response received: '+ error);
-              }
-              console.log(response.statusCode);
-              console.log(response.body);
-              console.log(response.headers);
-            });
+                console.log('Error response received: ' + error);
+            }
+            console.log(response.statusCode);
+            console.log(response.body);
+            console.log(response.headers);
+        });
         res.redirect(backURL);
     });
 
@@ -331,14 +347,14 @@ var request = sg.emptyRequest({
         }, function(err, affected, resp) {
             console.log(resp);
         });
-        sg.API(request, function (error, response) {
+        sg.API(request, function(error, response) {
             if (error) {
-                console.log('Error response received: '+ error);
-              }
-              console.log(response.statusCode);
-              console.log(response.body);
-              console.log(response.headers);
-            });
+                console.log('Error response received: ' + error);
+            }
+            console.log(response.statusCode);
+            console.log(response.body);
+            console.log(response.headers);
+        });
         res.redirect(backURL);
     });
 
